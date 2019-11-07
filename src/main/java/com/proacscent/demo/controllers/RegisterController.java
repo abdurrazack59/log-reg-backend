@@ -18,10 +18,17 @@ public class RegisterController {
     private ApplicationUserRepository applicationUserRepository;
 
     @PostMapping()
-    public String registerUser(@RequestBody ApplicationUser applicationUser){
+    public String registerUser(@RequestBody ApplicationUser applicationUser) {
 
-        applicationUser.setPassword(bCryptPasswordEncoder.encode(applicationUser.getPassword()));
-        applicationUserRepository.save(applicationUser);
-        return applicationUser.getFirstName()+" "+applicationUser.getLastName()+" registered successfully";
+        ApplicationUser user = applicationUserRepository.findByEmail(applicationUser.getEmail());
+        if (user == null) {
+            applicationUser.setPassword(bCryptPasswordEncoder.encode(applicationUser.getPassword()));
+            applicationUserRepository.save(applicationUser);
+            return applicationUser.getFirstName() + " " + applicationUser.getLastName() + " registered successfully";
+        }
+        else {
+            return null;
+        }
+
     }
 }

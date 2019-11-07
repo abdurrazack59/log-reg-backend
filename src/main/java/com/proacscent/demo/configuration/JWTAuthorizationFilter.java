@@ -54,12 +54,9 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             ServletContext servletContext = request.getServletContext();
             WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
             userDetailsService = webApplicationContext.getBean(UserDetailsServiceImpl.class);
-            System.out.println("##################################");
-
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(user);
 
-            System.out.println("New User added with"+userDetails.getAuthorities());
             if (user != null) {
                 return new UsernamePasswordAuthenticationToken(user, null,userDetails.getAuthorities());
             }

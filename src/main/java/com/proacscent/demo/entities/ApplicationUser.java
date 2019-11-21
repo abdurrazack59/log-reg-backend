@@ -20,6 +20,9 @@ public class ApplicationUser {
     private String email;
 
     @Column
+    private long mobileNumber;
+
+    @Column
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -60,19 +63,15 @@ public class ApplicationUser {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getPassword() { return password; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public long getMobileNumber() { return mobileNumber;}
 
-    public Set<Roles> getRoles() {
-        return roles;
-    }
+    public void setMobileNumber(long mobileNumber) { this.mobileNumber = mobileNumber; }
 
-    public void setRoles(Set<Roles> roles) {
-        this.roles = roles;
-    }
+    public void setPassword(String password) { this.password = password; }
+
+    public Set<Roles> getRoles() { return roles; }
+
+    public void setRoles(Set<Roles> roles) { this.roles = roles; }
 }
